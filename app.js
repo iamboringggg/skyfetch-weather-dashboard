@@ -2,44 +2,123 @@ const API_KEY = "d43fd0d93e4bd01cb2f8fc7a00058cd4";
 
 const API_URL = "https://api.openweathermap.org/data/2.5/weather";
 
-function getWeather(city) {
+const searchBtn = document.getElementById("search-btn");
+
+const cityInput = document.getElementById("city-input");
+
+async function getWeather(city) {
+  showLoading();
+
   const url = `${API_URL}?q=${city}&appid=${API_KEY}&units=metric`;
 
-  axios
-    .get(url)
+  try {
+    const response = await axios.get(url);
 
-    .then(function (response) {
-      console.log(response.data);
+    displayWeather(response.data);
+  } catch (error) {
+    console.error(error);
 
-      displayWeather(response.data);
-    })
-
-    .catch(function (error) {
-      console.log(error);
-    });
+    if (error.response && error.response.status === 404) {
+      showError("City not found. Please try again.");
+    } else {
+      showError("Something went wrong.");
+    }
+  }
 }
 
 function displayWeather(data) {
-  const city = data.name;
+  const cityName = data.name;
 
-  const temp = Math.round(data.main.temp);
+  const temperature = Math.round(data.main.temp);
 
-  const desc = data.weather[0].description;
+  const description = data.weather[0].description;
 
   const icon = data.weather[0].icon;
 
-  const iconURL = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+  const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
-  document.getElementById("weather-display").innerHTML = `
-<h2>${city}</h2>
+  const weatherHTML = `
 
-<img src="${iconURL}" class="weather-icon">
+<div class="weather-info">
 
-<div class="temperature">${temp}°C</div>
+<h2 class="city-name">
+${cityName}
+</h2>
 
-<p>${desc}</p>
+<img
+src="${iconUrl}"
+class="weather-icon"
+>
+
+<div class="temperature">
+
+${temperature}°C
+
+</div>
+
+<p class="description">
+
+${description}
+
+</p>
+
+</div>
 
 `;
+
+  document.getElementById("weather-display").innerHTML = weatherHTML;
+
+  cityInput.focus();
 }
 
-getWeather("London");
+function showError(message) {
+  const errorHTML = `
+
+<div class="error-message">
+
+<h3>❌ Error</h3>
+
+<p>${message}</p>
+
+</div>
+
+`;
+
+  document.getElementById("weather-display").innerHTML = errorHTML;
+}
+
+function showLoading() {
+  const loadingHTML = `
+
+<div class="loading-container">
+
+<div class="spinner"></div>
+
+<p>Loading...</p>
+
+</div>
+
+`;
+
+  document.getElementById("weather-display").innerHTML = loadingHTML;
+}
+
+searchBtn.addEventListener("click", function () {
+  const city = cityInput.value.trim();
+
+  if (!city) {
+    showError("Please enter a city name");
+
+    return;
+  }
+
+  getWeather(city);
+
+  cityInput.value = "";
+});
+
+cityInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    searchBtn.click();
+  }
+});

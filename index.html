@@ -2,10 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>SkyFetch Weather Dashboard</title>
+        <title>SkyFetch - Weather Dashboard</title>
 
         <link rel="stylesheet" href="style.css" />
     </head>
@@ -14,10 +13,22 @@
         <div class="container">
             <h1>🌤️ SkyFetch</h1>
 
-            <p>Your Personal Weather Dashboard</p>
+            <p class="tagline">Your Personal Weather Dashboard</p>
+
+            <div class="search-section">
+                <input
+                    type="text"
+                    id="city-input"
+                    placeholder="Enter city name..."
+                />
+
+                <button id="search-btn">🔍 Search</button>
+            </div>
 
             <div id="weather-display">
-                <p>Loading weather data...</p>
+                <div class="welcome-message">
+                    Enter a city name to get started!
+                </div>
             </div>
         </div>
 

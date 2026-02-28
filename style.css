@@ -1,176 +1,75 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: "Segoe UI", Tahoma;
+    font-family: Arial;
 
     background: linear-gradient(135deg, #667eea, #764ba2);
 
-    min-height: 100vh;
+    height: 100vh;
 
     display: flex;
 
     justify-content: center;
 
     align-items: center;
-
-    padding: 20px;
 }
 
 .container {
     background: white;
 
-    padding: 40px;
+    padding: 30px;
 
     border-radius: 20px;
 
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 400px;
 
     text-align: center;
-
-    max-width: 600px;
-
-    width: 100%;
-}
-
-h1 {
-    font-size: 2.5rem;
-
-    margin-bottom: 10px;
-}
-
-.tagline {
-    color: #666;
-
-    margin-bottom: 30px;
 }
 
 .search-section {
-    margin-bottom: 30px;
-
     display: flex;
 
     gap: 10px;
+
+    margin-bottom: 20px;
 }
 
 #city-input {
-    padding: 12px 20px;
-
-    border-radius: 25px;
-
-    border: 2px solid #ddd;
-
     flex: 1;
 
-    font-size: 1rem;
-}
+    padding: 10px;
 
-#city-input:focus {
-    outline: none;
+    border-radius: 20px;
 
-    border-color: #667eea;
+    border: 1px solid gray;
 }
 
 #search-btn {
-    padding: 12px 30px;
-
-    background: linear-gradient(135deg, #667eea, #764ba2);
-
-    color: white;
+    padding: 10px 20px;
 
     border: none;
 
-    border-radius: 25px;
+    border-radius: 20px;
+
+    background: #667eea;
+
+    color: white;
 
     cursor: pointer;
-
-    transition: 0.3s;
 }
 
-#search-btn:hover {
-    transform: scale(1.05);
-}
+/* WEATHER */
 
-.city-name {
-    font-size: 2rem;
-
-    margin-bottom: 10px;
+.weather-info img {
+    width: 100px;
 }
 
 .temperature {
-    font-size: 3rem;
-
-    color: #667eea;
-
-    margin: 20px 0;
+    font-size: 40px;
 }
 
-.weather-icon {
-    width: 100px;
-
-    height: 100px;
-}
-
-.spinner {
-    width: 50px;
-
-    height: 50px;
-
-    border: 5px solid #eee;
-
-    border-top: 5px solid #667eea;
-
-    border-radius: 50%;
-
-    margin: 20px auto;
-
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.error-message {
-    background: #ffe6e6;
-
-    color: #cc0000;
-
-    padding: 20px;
-
-    border-radius: 10px;
-
-    border-left: 5px solid red;
-}
-
-.welcome-message {
-    font-size: 1.2rem;
-
-    color: #666;
-
-    margin-top: 20px;
-}
+/* FORECAST */
 
 .forecast-section {
-    margin-top: 30px;
-
-    padding-top: 30px;
-
-    border-top: 2px solid #eee;
-}
-
-.forecast-title {
-    margin-bottom: 20px;
-
-    font-size: 1.5rem;
+    margin-top: 20px;
 }
 
 .forecast-container {
@@ -182,31 +81,83 @@ h1 {
 }
 
 .forecast-card {
-    background: #f8f8ff;
+    background: #f5f5f5;
 
-    padding: 15px;
+    padding: 10px;
 
-    border-radius: 15px;
-
-    text-align: center;
-
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-
-    transition: 0.3s;
-}
-
-.forecast-card:hover {
-    transform: translateY(-5px);
-
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 .forecast-card img {
-    width: 60px;
+    width: 50px;
 }
 
-@media (max-width: 768px) {
-    .forecast-container {
-        grid-template-columns: repeat(2, 1fr);
+/* LOADING */
+
+.spinner {
+    width: 50px;
+
+    height: 50px;
+
+    border: 5px solid gray;
+
+    border-top: 5px solid blue;
+
+    border-radius: 50%;
+
+    animation: spin 1s linear infinite;
+
+    margin: auto;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
     }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ERROR */
+
+.error-message {
+    color: red;
+
+    margin-top: 20px;
+}
+
+/* RECENT SEARCHES */
+
+.recent-searches-section {
+    margin: 20px 0;
+}
+
+#recent-searches-container {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    justify-content: center;
+}
+
+.recent-search-btn {
+    padding: 8px 16px;
+
+    border-radius: 20px;
+
+    border: none;
+
+    background: #eee;
+
+    cursor: pointer;
+}
+
+.recent-search-btn:hover {
+    background: #667eea;
+
+    color: white;
 }
